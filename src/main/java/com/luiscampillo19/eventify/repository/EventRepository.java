@@ -1,32 +1,17 @@
 package com.luiscampillo19.eventify.repository;
 
 import com.luiscampillo19.eventify.model.Event;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
-public class EventRepository {
+public interface EventRepository extends JpaRepository<Event, Long> {
 
-    private final List<Event> events = new ArrayList<>();
-    private final AtomicLong idCounter = new AtomicLong(0);
-
-    public Event save(Event event) {
-        event.setId(idCounter.incrementAndGet());
-        events.add(event);
-        return event;
-    }
-
-    public List<Event> findAll() {
-        return new ArrayList<>(events);
-    }
-
-    public Optional<Event> findById(Long id) {
-        return events.stream()
-                .filter(e -> e.getId().equals(id))
-                .findFirst();
-    }
+    /**
+     * Consulta derivada: busca eventos cuyo nombre contenga el texto indicado.
+     * Equivale a: SELECT * FROM events WHERE nombre LIKE '%nombre%'
+     */
+    List<Event> findByNombreContaining(String nombre);
 }

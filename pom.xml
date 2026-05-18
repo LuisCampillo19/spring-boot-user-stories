@@ -47,6 +47,12 @@
             <version>2.6.0</version>
         </dependency>
 
+        <!-- Thymeleaf (motor de plantillas MVC) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
         <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <th:block th:replace="~{fragments/layout :: head('Dashboard')}"/>
+</head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+      <h1 class="display-5 fw-bold mb-2">
+        <i class="bi bi-calendar-event-fill text-primary me-2"></i>Panel de Administración
+      </h1>
+      <p class="text-muted mb-4">Gestiona el catálogo de eventos y lugares desde aquí.</p>
+      <div class="d-flex gap-3 justify-content-center">
+        <a th:href="@{/admin/events}" class="btn btn-primary btn-lg">
+          <i class="bi bi-calendar3 me-1"></i>Ver Eventos
+        </a>
+        <a th:href="@{/admin/venues}" class="btn btn-outline-secondary btn-lg">
+          <i class="bi bi-geo-alt me-1"></i>Ver Lugares
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <th:block th:replace="~{fragments/layout :: head('Eventos')}"/>
+</head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<div class="container py-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold mb-0">
+      <i class="bi bi-calendar3 me-2 text-primary"></i>Catálogo de Eventos
+    </h2>
+    <a th:href="@{/admin/events/new}" class="btn btn-primary">
+      <i class="bi bi-plus-circle me-1"></i>Nuevo Evento
+    </a>
+  </div>
+
+  <!-- Escenario 2: Catálogo vacío (th:if) -->
+  <div th:if="${#lists.isEmpty(events)}"
+       class="alert alert-info d-flex align-items-center gap-2 badge-empty" role="alert">
+    <i class="bi bi-info-circle-fill fs-5"></i>
+    <span>Actualmente no hay eventos programados.</span>
+  </div>
+
+  <!-- Escenario 1: Tabla con datos (th:unless + th:each + th:text) -->
+  <div th:unless="${#lists.isEmpty(events)}" class="card shadow-sm">
+    <div class="card-body p-0">
+      <table class="table table-hover table-striped mb-0">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Fecha</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="event : ${events}">
+            <td th:text="${event.id}">1</td>
+            <td th:text="${event.nombre}">Concierto</td>
+            <td th:text="${#temporals.format(event.fecha, 'dd/MM/yyyy')}">01/01/2026</td>
+            <td th:text="${event.descripcion}">Descripción</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer text-muted small">
+      Total: <span th:text="${#lists.size(events)}">0</span> evento(s) registrado(s).
+    </div>
+  </div>
+
+</div>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>
